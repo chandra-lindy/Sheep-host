@@ -122,6 +122,12 @@ const Dashboard = React.createClass({
 		})
 	},
 
+	componentWillUnmount(){
+        	clearInterval(this.state.fetchInterval);
+        	this.state.fetchInterval = 0;
+        	console.log('interval stopped');
+    	},
+
 	toggleInfoDisplayed(e) {
 		console.log('e toggle info', e)
 		this.setState({infoDisplayed: e.target.name})
