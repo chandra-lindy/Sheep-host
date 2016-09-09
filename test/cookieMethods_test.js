@@ -8,24 +8,6 @@ var request = require('supertest')(app);
 var expect = chai.expect;
 
 describe ('Cookie methods functionality test', function() {
-  // var tokenCookie;
-  // var dbCookie;
-  // var location;
-  //
-  // before(function(done) {
-  //   var user = { userName: 'oo', password: 'oo' }
-  //
-  //   request
-  //     .post('/login')
-  //     .send(user)
-  //     .end(function(err, res) {
-  //       dbCookie = res.header['set-cookie'].pop().split(';')[0].split('=')[0];
-  //       tokenCookie = res.header['set-cookie'].pop().split(';')[0].slice(0, 5);
-  //       location = res.header.location;
-  //       done();
-  //     });
-  // });
-
   it('should set token cookie', function(done) {
     var user = { userName: 'oo', password: 'oo' }
     request

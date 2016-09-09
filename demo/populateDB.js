@@ -1,41 +1,41 @@
 function populateNewDB() {
 
   const images = [
-  'http://4.bp.blogspot.com/-_qm9BNdFzrE/UNhmPr4b8gI/AAAAAAAABQc/QzS_2oDGYmQ/s640/HaGiang2.jpg',
-  'http://1.bp.blogspot.com/-8rdWz3hAw1A/UjHKq5Hn92I/AAAAAAAAHXU/52Vj1XrZd38/s1600/Beautiful-Scenery-And-Colourful-Landscapes-2.jpg',
-  'https://pixabay.com/static/uploads/photo/2015/03/28/16/40/lake-696098_960_720.jpg',
-  'http://coverjunction.s3.amazonaws.com/manual/low/scenery5.jpg',
-  'http://cdn.wallpapersafari.com/30/21/lriKTt.jpg',
-  'http://www.hungamalive.com/wp-content/uploads/2015/08/Scenery-HD-6.jpg',
-  'http://www.gawlerrangessafaris.com/wp-content/uploads/2013/04/scenery-photo10.jpg',
-  'https://s-media-cache-ak0.pinimg.com/564x/71/ec/89/71ec89208756f3ba802787105516897d.jpg',
-  'https://image.winudf.com/27/1f8dd2eb12dd2b/screen-6.jpg',
-  'http://www.yokoso-japan.jp/_tourimg/05523_1.jpg',
-  'http://courant.chictrib.netdna-cdn.com/media/catalog/product/cache/6/image/9df78eab33525d08d6e5fb8d27136e95/s/u/sunset_fishing.jpg',
-  'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQae6IcjVq9LXLd4QWieoM4N2nQPsWkltUy-nrIGaroeZy4CAqb5w',
-  'http://image.shutterstock.com/display_pic_with_logo/348181/134111978/stock-photo-scenic-summer-scenery-of-the-old-town-in-stockholm-sweden-134111978.jpg',
-  'http://www.chinadaily.com.cn/travel/img/attachement/jpg/site1/20140904/002564bc654b157246001e.jpg',
-  'http://www.kingsizetheme.com/wp-content/uploads/2015/11/6224049770_5d353af67c_b.jpg',
-  'http://news.xinhuanet.com/english/photo/2015-03/29/134107161_14276161288361n.jpg'
+    'http://static1.visitfinland.com/wp-content/uploads/Header_sunset_Tampere-400x300.jpg',
+    'http://www.interestingemails.com/wp-content/uploads/2011/12/beautiful-scenery-pictures-400x300.jpg',
+    'http://3.bp.blogspot.com/-5iqaRuw2nps/TouHNAXdXoI/AAAAAAAAAe4/FIgPo0yJEcU/s1600/nature+scenery+wallpaper-2.jpg',
+    'http://www.interestingemails.com/wp-content/uploads/2011/12/beautiful-desert-scenery-400x300.jpg',
+    'https://s-media-cache-ak0.pinimg.com/564x/c1/5e/1e/c15e1e1e5bba2733e555a27eecd28ef3.jpg',
+    'http://static3.businessinsider.com/image/4c1249fe7f8b9aa91fed0100-1190-625/photos-zhangjiajie--the-place-that-inspired-the-beautiful-scenery-in-avatar.jpg',
+    'http://simplegoodandtasty.com/sites/default/files/images/hunting_nature.preview.jpg',
+    'http://www.100steps.info/images/Boardman-SSC-Lone-Ranch-Beach-table-overlooking-beach-400x300.jpg',
+    'https://c2.staticflickr.com/4/3200/3027179851_298dc82f08.jpg',
+    'http://static4.businessinsider.com/image/4dc00aef49e2aec42a1e0000-1190-625/beautiful-abbottabad-actually-bin-laden-was-living-in-a-scenic-tourist-town.jpg',
+    'http://kirstygreenwood.typepad.com/.a/6a010536b33b69970b01a73de9e507970d-pi',
+    'http://2.bp.blogspot.com/_bRxsZ6mMWDw/SMoOrdxcPvI/AAAAAAAAAlw/itjhUD0OdgE/s400/sight+2.jpg',
+    'http://www.americanwhitewater.org/resources/images/contents/32119-2.jpg',
+    'http://1.bp.blogspot.com/_XGnQrL8fEK4/TGvGWdiCmhI/AAAAAAAAAF8/o1WU9epjjac/s400/beautiful-beach-nature-scenery.jpg',
+    'http://questtours.in/wp-content/uploads/2016/02/Scenic_Sri_Lanka1-400x300.jpg',
+    'http://niackery.com/wp-content/uploads/2014/10/yokjido-scenery-dsc00015-400x300.jpg'
   ];
 
   const captions = [
-    'Scene1',
-    'Scene2',
-    'Scene3',
-    'Scene4',
-    'Scene5',
-    'Scene6',
-    'Scene7',
-    'Scene8',
-    'Scene9',
-    'Scene10',
-    'Scene11',
-    'Scene12',
-    'Scene13',
-    'Scene14',
-    'Scene15',
-    'Scene16'
+    'Amber sunset',
+    'Mountain backdrop',
+    'Mountain reflection',
+    'Long road',
+    'Green nature',
+    'High clif',
+    'Desert sunset',
+    'Misty beach',
+    'Snowy mountain',
+    'Nature cabin',
+    'Ocean side',
+    'Waterfall',
+    'Raging rapids',
+    'Purple sunset',
+    'Flower garden',
+    'Island'
   ];
 
   for (let i = 0; i < images.length; i++) {
