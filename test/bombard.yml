@@ -1,0 +1,27 @@
+config:
+  target: 'https://sheep.host'
+  phases:
+    - duration: 10
+      arrivalRate: 100
+  defaults:
+    headers:
+
+scenarios:
+  - flow:
+    - get:
+        url: "/getDBs/57d090f19a5026bf13ae272c"
+
+# config:
+#   target: 'https://sheep.host'
+#   phases:
+#     - duration: 20
+#       arrivalRate: 85
+#   defaults:
+#     headers:
+#       Authorization: "Basic: ZDQwNTljYTMtM2Y3My00ZmZiLWJjOTktNWI4NDMyNjJlMjI0OmRmMTEyZDJhLTNlMmMtNDRlZi1iOGRmLWU1YzcwMzQyMWQ1Nw=="
+#       Content-Type: "application/json"
+#
+# scenarios:
+#   - flow:
+#     - get:
+#         url: "/api/57d22e166b436ee425817396/gallery/landscape1"
