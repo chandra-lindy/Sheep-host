@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import auth from '../Auth'
 import jwtDecode from 'jwt-decode';
 import ClientInput from './clientInput'
+import NavigationBar from './NavigationBar';
 import FirstNavBar from './Dashboard2.0/FirstNavBar';
 import SecondNavBar from './Dashboard2.0/SecondNavBar';
 import Display from './Dashboard2.0/Display';
@@ -90,15 +91,15 @@ const Dashboard = React.createClass({
 	componentDidUpdate(){
 		if(!auth.loggedIn()){
 			clearInterval(this.state.fetchInterval);
-			fetchInterval = 0;
+			this.state.fetchInterval = 0;
 			console.log('interval stopped');
 		}
 		if(auth.loggedIn() && this.state.DBkeys.length > 0 && this.state.Colkeys.length > 0){
-			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 10000);
+			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 2000);
 			else{
 				clearInterval(this.state.fetchInterval);
 				this.state.fetchInterval = 0;
-				this.state.fetchInterval = setInterval(this.fetchData, 10000);
+				this.state.fetchInterval = setInterval(this.fetchData, 2000);
 			}
 		}
 	},
@@ -123,10 +124,10 @@ const Dashboard = React.createClass({
 	},
 
 	componentWillUnmount(){
-        	clearInterval(this.state.fetchInterval);
-        	this.state.fetchInterval = 0;
-        	console.log('interval stopped');
-    	},
+		clearInterval(this.state.fetchInterval);
+		this.state.fetchInterval = 0;
+		console.log('interval stopped');
+	},
 
 	toggleInfoDisplayed(e) {
 		console.log('e toggle info', e)
@@ -193,8 +194,8 @@ const Dashboard = React.createClass({
 			dbName = '';
 			collectionName = '';
 			let schema = '';
-			// let infoDisplayed = 'dashboard';
-			that.setState({database, DBkeys, dbName, collectionName, schema})
+			let infoDisplayed = 'dashboard';
+			that.setState({database, DBkeys, dbName, collectionName, schema, infoDisplayed})
 		}).catch(function(error){
 			console.log('error on create submit', error);
 		})
@@ -204,8 +205,7 @@ const Dashboard = React.createClass({
 		e.preventDefault();
 		let that = this;
 		const _id = that.state._id;
-		const post = JSON.parse(that.state.postInput);
-		console.log('post', post);
+		let post = JSON.parse(that.state.postInput);
 		const _dbName = that.state.DBkeys[that.state.activeDBLink];
 		const _collectionName = that.state.Colkeys[this.state.activeCollectionLink];
 		const link = _id +'/'+ _dbName +'/'+ _collectionName
@@ -216,7 +216,7 @@ const Dashboard = React.createClass({
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken},
 			data: post
 		}).then(function(response){
-			console.log(response)
+			that.setState({postInput:''})
 		}).catch(function(error){
 			console.log('error posting to the database', error);
 		})
@@ -321,62 +321,52 @@ const Dashboard = React.createClass({
 			let collectionData = "This collection is empty."
 		}
 		else{let collectionData = this.state.activeCollectionData;}
-		if(this.state.infoDisplayed ==='dashboard') {
-			return (
-				<div className="outer">
-					<WelcomeBanner name={this.state.userName}/>
-					<SettingsNavBar toggle={this.toggleInfoDisplayed}/>
-					<FirstNavBar click={this.onDBClick} names={this.state.DBkeys} />
-					<SecondNavBar click={this.onColClick} names={this.state.Colkeys} />
-          <Display display={this.state.activeCollectionData} />
-          <ApiSandbox
-          	postClick={this.onPostClick}
-          	putClick={this.onPutClick}
-          	deleteClick={this.onDeleteClick}
-          	onChange={this.onChange}
-          />
-				</div>
-			)
-		}
-		if(this.state.infoDisplayed === 'create') {
-			return (
-				<div>
-					<WelcomeBanner name={this.state.userName}/>
-					<SettingsNavBar toggle={this.toggleInfoDisplayed}/>
-					<ClientInput
-						onChange={this.onChange}
-						onCreateClick={this.onCreateClick}
-					 />
-				</div>
-			)
-		}
-		if(this.state.infoDisplayed === 'profile') {
-			return(
-				<div>
-					<WelcomeBanner name={this.state.userName} />
-					<SettingsNavBar toggle={this.toggleInfoDisplayed} />
-					<UserProfile
-											authKey={this.state.authKey}
-											profileInfo={profileInfo}
-											onClick={this.onSecretClick}
-											secretKeyVisible={this.state.secretKeyVisible} />
-					<Permissions
-											permissions={this.state.permissions}
-											onClick={this.onPermissionsClick}
-											savePermissions={this.savePermissions} />
-					<PublicAPI devId={this.state._id} authKey={this.state.authKey} />
-				</div>
-			)
-		}
-		if(this.state.infoDisplayed === 'docs') {
-			return(
-				<div>
-					<WelcomeBanner name={this.state.userName}/>
-					<SettingsNavBar toggle={this.toggleInfoDisplayed}/>
-					<Docs />
-				</div>
-			)
-		}
+		return (
+			<div>
+				<NavigationBar />
+				<WelcomeBanner name={this.state.userName}/>
+				<SettingsNavBar toggle={this.toggleInfoDisplayed}/>
+				{this.state.infoDisplayed === 'dashboard' &&
+					<div>
+						<FirstNavBar click={this.onDBClick} names={this.state.DBkeys} />
+						<SecondNavBar click={this.onColClick} names={this.state.Colkeys} />
+			      <Display display={this.state.activeCollectionData} />
+			      <ApiSandbox
+			      	postClick={this.onPostClick}
+			      	postInput={this.state.postInput}
+			      	putClick={this.onPutClick}
+			      	deleteClick={this.onDeleteClick}
+			      	onChange={this.onChange}/>
+		    	</div>
+		    }
+        {this.state.infoDisplayed === 'create' &&
+      		<div>
+      			<ClientInput
+							onChange={this.onChange}
+							onCreateClick={this.onCreateClick}/>
+					</div>
+				}
+			 {this.state.infoDisplayed === 'profile' &&
+					<div>
+						<UserProfile
+							authKey={this.state.authKey}
+							profileInfo={profileInfo}
+							onClick={this.onSecretClick}
+							secretKeyVisible={this.state.secretKeyVisible} />
+						<Permissions
+							permissions={this.state.permissions}
+							onClick={this.onPermissionsClick}
+							savePermissions={this.savePermissions} />
+						<PublicAPI devId={this.state._id} authKey={this.state.authKey} />
+					</div>
+				}
+				{this.state.infoDisplayed === 'docs' &&
+					<div>
+						<Docs />
+					</div>
+				}
+			</div>
+		)	
 	}
 })
 
