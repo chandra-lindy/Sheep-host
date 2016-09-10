@@ -5,18 +5,10 @@ var cookieMethods = require('../../database/methods/cookieMethods.js');
 
 var router = express.Router()
 
-//VALIDATION / AUTHENTICATION GOES HERE!!!!!!!~~~~~~~~~~~~~~~
-//and password confirmation
-
-// router.post('/',
-//   devMethods.usernameExist,
-//   devMethods.addDev,
-//   cookieMethods.setCookie
-// );
-
 router.post('/',
   devMethods.usernameExist,
-  devMethods.sendVerification
+  devMethods.addDev,
+  cookieMethods.setCookie
 );
 
 router.get('/verify/:key',

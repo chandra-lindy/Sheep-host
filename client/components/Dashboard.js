@@ -48,6 +48,7 @@ const Dashboard = React.createClass({
 	},
 
 	componentWillMount(){
+		document.body.style.background = "white";
 		localStorage.sheepToken = cookie.load('token');
 		let token = jwtDecode(localStorage.sheepToken);
 		let authKey = token.authKey;
@@ -59,12 +60,14 @@ const Dashboard = React.createClass({
 	},
 
 	componentDidMount() {
+		document.body.style.background = "white";
 		this.getData();
 	},
 
   getData() {
 		let that = this;
 		let _id = jwtDecode(localStorage.sheepToken).devID;
+		console.log('getData _id',_id);
 		axios.get('/getDBs/'+_id).then(function(response) {
 			if(response.data.length> 0){
 				let info = {};
@@ -95,11 +98,11 @@ const Dashboard = React.createClass({
 			console.log('interval stopped');
 		}
 		if(auth.loggedIn() && this.state.DBkeys.length > 0 && this.state.Colkeys.length > 0){
-			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 2000);
+			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 1000);
 			else{
 				clearInterval(this.state.fetchInterval);
 				this.state.fetchInterval = 0;
-				this.state.fetchInterval = setInterval(this.fetchData, 2000);
+				this.state.fetchInterval = setInterval(this.fetchData, 1000);
 			}
 		}
 	},
@@ -130,9 +133,7 @@ const Dashboard = React.createClass({
 	},
 
 	toggleInfoDisplayed(e) {
-		console.log('e toggle info', e)
 		this.setState({infoDisplayed: e.target.name})
-		console.log('dashboard toggle info state', this.state)
 	},
 
 	onColClick(e) {
@@ -309,9 +310,9 @@ const Dashboard = React.createClass({
 		let apiKey = decoded.split(':')[0];
 		let clientKey = decoded.split(':')[1];
 		let profileInfo = {};
+
 		profileInfo['Username'] = this.state.userName;
 		profileInfo['Developer ID'] = this.state._id;
-		// profileInfo['E-mail'] = this.state.email;
 		profileInfo['API Key'] = apiKey;
 		profileInfo['Client Key'] = clientKey;
 		for(let name in this.state.database) {
