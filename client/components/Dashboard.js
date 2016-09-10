@@ -98,11 +98,11 @@ const Dashboard = React.createClass({
 			console.log('interval stopped');
 		}
 		if(auth.loggedIn() && this.state.DBkeys.length > 0 && this.state.Colkeys.length > 0){
-			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 10000);
+			if(!this.state.fetchInterval) this.state.fetchInterval = setInterval(this.fetchData, 1000);
 			else{
 				clearInterval(this.state.fetchInterval);
 				this.state.fetchInterval = 0;
-				this.state.fetchInterval = setInterval(this.fetchData, 10000);
+				this.state.fetchInterval = setInterval(this.fetchData, 1000);
 			}
 		}
 	},
@@ -131,7 +131,6 @@ const Dashboard = React.createClass({
 		this.state.fetchInterval = 0;
 		console.log('interval stopped');
 	},
-
 
 	toggleInfoDisplayed(e) {
 		this.setState({infoDisplayed: e.target.name})
@@ -196,8 +195,8 @@ const Dashboard = React.createClass({
 			dbName = '';
 			collectionName = '';
 			let schema = '';
-			alert('Created Successfully')
-			that.setState({database, DBkeys, dbName, collectionName, schema})
+			let infoDisplayed = 'dashboard';
+			that.setState({database, DBkeys, dbName, collectionName, schema, infoDisplayed})
 		}).catch(function(error){
 			console.log('error on create submit', error);
 		})
@@ -213,7 +212,7 @@ const Dashboard = React.createClass({
 		const link = _id +'/'+ _dbName +'/'+ _collectionName
 		axios({
 			method: 'post',
-			baseURL: 'http://sheep.host/api/',
+			baseURL: 'https://sheep.host/api/',
 			url: link,
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken},
 			data: post
@@ -238,7 +237,7 @@ const Dashboard = React.createClass({
 		const link = _id +'/'+ _dbName +'/'+ _collectionName  + '/?' + _putKey + '=' + _putValue;
 		axios({
 			method: 'put',
-			baseURL: 'http://sheep.host/api/',
+			baseURL: 'https://sheep.host/api/',
 			url: link,
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken},
 			data: put
@@ -261,7 +260,7 @@ const Dashboard = React.createClass({
 		const link = _id +'/'+ _dbName +'/'+ _collectionName + '/?' + _deleteKey + '=' + _deleteValue;
 		axios({
 			method: 'delete',
-			baseURL: 'http://sheep.host/api/',
+			baseURL: 'https://sheep.host/api/',
 			url: link,
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken}
 		}).then(function(response){
@@ -296,8 +295,8 @@ const Dashboard = React.createClass({
   	data['permissions'] = permissions;
 		axios({
 			method: 'post',
-      baseURL: 'http://sheep.host/',
-			url: 'permission',
+			baseURL: 'https://sheep.host/',
+			url: 'permission/',
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken},
 			data: data
 		}).then(function(response){

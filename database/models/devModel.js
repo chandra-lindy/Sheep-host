@@ -30,7 +30,7 @@ var Collections = new Schema({
 });
 
 var databaseSchema = new Schema({
-  _creator: { type: Schema.Types.ObjectId, ref: 'Dev' },
+  _creator: { type: Schema.Types.ObjectId, ref: 'Dev' , index: true},
   name: { type: String, default: 'null' },
   collections: [Collections],
 });

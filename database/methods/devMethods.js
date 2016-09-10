@@ -113,7 +113,7 @@ function addDev(req, res, next){
       userName: result.userName,
       devID: result._id,
       email: result.email,
-      permissions: dev.api.clientPermissions
+      permissions: result.api.clientPermissions
   }, 'sheep host', { expiresIn: 120000});
     console.log('server side token', sheepToken);
     req.body.token = sheepToken;
@@ -123,7 +123,7 @@ function addDev(req, res, next){
 
 // login middleware
 function usernameExist(req, res, next){
-  Models.Dev.findOne({ $or: [ {'userName': req.body.userName}, {'email': req.body.email} ] }, 'userName', function(err, dev) {
+  Models.Dev.findOne({ 'userName': req.body.userName }, 'userName', function(err, dev) {
     console.log('inside usernameExist')
     console.log('dev username exist',dev);
       if(dev === null) {
@@ -135,6 +135,8 @@ function usernameExist(req, res, next){
       }
   })
 }
+
+// { $or: [ {'userName': req.body.userName}, {'email': req.body.email} ] }
 
 // create DB button middleware that adds to DB collection
 function addDB(req, res, next){
