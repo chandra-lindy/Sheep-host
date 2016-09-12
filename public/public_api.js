@@ -4,7 +4,7 @@ var sheep = {
     user = obj;
   },
 
-  post: function(dbName, colName, data) {
+  post: function(dbName, colName, data, cb) {
     const url = user.url + user.id + '/' + dbName + '/' + colName;
     const httpReq = new XMLHttpRequest();
     httpReq.open('POST', url, true);
@@ -12,8 +12,8 @@ var sheep = {
     httpReq.setRequestHeader('Authorization', user.authKey);
     httpReq.onreadystatechange = function() {
       if (httpReq.readyState === XMLHttpRequest.DONE) {
-        if (httpReq.status === 200) console.log('POST success!');
-        else console.log('Mucha problema!!');
+        if (httpReq.status === 200) cb(null, httpReq.responseText);
+        else cb(httpReq.status, null);
       }
     }
     httpReq.send(JSON.stringify(data));
@@ -26,7 +26,7 @@ var sheep = {
     httpReq.setRequestHeader('Authorization', user.authKey);
     httpReq.onreadystatechange = function() {
       if (httpReq.readyState === XMLHttpRequest.DONE) {
-        if (httpReq.status === 200) cb(null, httpReq.responseText);
+        if (httpReq.status === 200) cb(null, JSON.parse(httpReq.responseText));
         else cb('Mucha problemas!!', null);
       }
     }
