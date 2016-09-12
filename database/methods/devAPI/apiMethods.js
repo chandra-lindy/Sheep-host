@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Devs = require('../../models/devModel');
 
 function storePost(req, res, next){
-  console.log('post req body', req.body);
+  // console.log('post req body', req.body);
   var post = {};
   for(var key in req.body){
     post[key] = req.body[key];

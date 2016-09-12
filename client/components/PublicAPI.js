@@ -7,9 +7,9 @@ const PublicAPI = (props) => {
       <div>
         <h2>SDK Script Tags</h2>
       </div>
-			<div className="jumbotron">
-        <h4>Copy the following script tag into your html file to use SDK methods:</h4>
-				<ul className="list-group">
+	<div className="jumbotron">
+        <h4 className="user-profile">Copy the following script tag into your html file to use SDK methods:</h4>
+	<ul className="list-group">
           <pre>
             <code id="code">
               &lt;script src="https://sheep.host/public_api"&gt;&lt;/script&gt;{'\n'}
@@ -24,11 +24,11 @@ const PublicAPI = (props) => {
               &lt;/script&gt;{'\n'}
             </code>
           </pre>
-				</ul>
+	</ul>
         <Clipboard component="button" className="btn btn-primary btn-lg" button-href="#" data-clipboard-target="#code">
         Copy script tag
       </Clipboard>
-			</div>
+	</div>
     </div>
 	);
 }

@@ -33,29 +33,36 @@ var sheep = {
     httpReq.send();
   },
 
-  put: function(dbName, colName, query, data) {
-    let key = Object.keys(query)[0];
-    let value = query[key];
-    axios({
-      method: 'POST',
-      url: user.url + user.id + '/' + dbName + '/' + colName + '/?' + key + '=' + value,
-      data: data,
-      headers: {
-        authorization: user.authKey
+  put: function(dbName, colName, query, data, cb) {
+    const key = Object.keys(query)[0];
+    const value = query[key];
+    const url = user.url + user.id + '/' + dbName + '/' + colName + '/?' + key + '=' + value;
+    const httpReq = new XMLHttpRequest();
+    httpReq.open('PUT', url, true);
+    httpReq.setRequestHeader('Authorization', user.authKey);
+    httpReq.onreadystatechange = function() {
+      if (httpReq.readyState === XMLHttpRequest.DONE) {
+        if (httpReq.status === 200) cb(null, httpReq.responseText);
+        else cb('Error encountered during PUT', null);
       }
-    }).then(() => console.log('success'));
+    }
+    httpReq.send();
   },
 
-  delete: function(dbName, colName, query) {
-    let key = Object.keys(query)[0];
-    let value = query[key];
-    axios({
-      method: 'DELETE',
-      url: user.url + user.id + '/' + dbName + '/' + colName + '/?' + key + '=' + value,
-      data: data,
-      headers: {
-        authorization: user.authKey
+  delete: function(dbName, colName, query, cb) {
+    const key = Object.keys(query)[0];
+    const value = query[key];
+    const url = user.url + user.id + '/' + dbName + '/' + colName + '/?' + key + '=' + value;
+    const httpReq = new XMLHttpRequest();
+    httpReq.open('PUT', url, true);
+    httpReq.setRequestHeader('Authorization', user.authKey);
+    httpReq.onreadystatechange = function() {
+      if (httpReq.readyState === XMLHttpRequest.DONE) {
+        if (httpReq.status === 200) cb(null, httpReq.responseText);
+        else cb('Error encountered during DELETE', null);
       }
-    }).then(() => console.log('success'));
+    }
+    httpReq.send();
   }
 }
+
