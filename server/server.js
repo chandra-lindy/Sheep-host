@@ -19,6 +19,7 @@ var app = express();
 var dirname = path.join(__dirname, '/../');
 
 app.use(express.static(dirname + 'public'));
+app.use(express.static(dirname + 'Public'));
 app.use('/public_api', express.static(__dirname + '/../public/public_api.js'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

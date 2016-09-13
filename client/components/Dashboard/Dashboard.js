@@ -111,10 +111,11 @@ const Dashboard = React.createClass({
 		const link = _id + '/' + _dbName + '/' + _collectionName;
 		axios({
 			method: 'get',
-			baseURL: 'http://localhost:3000/api/',
+			baseURL: 'https://sheep.host/api',
 			url: link,
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken}
 		}).then(function(response){
+			console.log('fetch response', response.data);
 			that.state.database[_dbName][_collectionName] = response.data;
 			that.setState({activeCollectionData: response.data, database: that.state.database})
 		})
@@ -308,7 +309,7 @@ const Dashboard = React.createClass({
 			profileInfo[name] = Object.keys(this.state.database[name])
 		}
 		if(!this.state.activeCollectionData){
-			let collectionData = "This collection is empty."
+			let collectionData = [];
 		}
 		else{let collectionData = this.state.activeCollectionData;}
 		return (

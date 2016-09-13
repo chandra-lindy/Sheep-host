@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import auth from '../Auth';
-import logo from '../../Public/sheepHostSheep.png';
+// import path from '../../rootPath.js';
+// import logo from 'Public/sheepHostSheep.png';
 
 export default () => {
   let loginButton;
@@ -16,7 +17,7 @@ export default () => {
 	return (
     <nav className="navbar navbar-default">
         <div className="navbar-header">
-          <Link to="/" className="navbar-brand"><img src={ logo } className="logo"/></Link>
+          <Link to="/" className="navbar-brand"><img src="https://sheep.host/sheepHostSheep.png" className="logo"/></Link>
         </div>
         <div className="collapse navbar-collapse header-action-words">
           <ul className="nav navbar-nav navbar-right header-action-words">
