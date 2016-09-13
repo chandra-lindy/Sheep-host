@@ -6,7 +6,7 @@ const LoginInput = (props) =>{
 			<form onSubmit={props.onSubmit}>
 				<h1 className="login-signup-words"> Login </h1>
 				<div className="form-group">
-					<label className="control-label login-signup-words"> Username</label>
+					<label className="control-label"> Username</label>
 					<input
 						onChange={props.onChange}
 						type="text"
@@ -16,7 +16,7 @@ const LoginInput = (props) =>{
 					</div>
 
 				<div className="form-group">
-					<label className="control-label login-signup-words">Password</label>
+					<label className="control-label">Password</label>
 					<input
 						onChange={props.onChange}
 						type="password"

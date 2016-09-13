@@ -1,13 +1,12 @@
 import React from 'react';
 
-const SignupInput =(props) =>{
+const SignupInput =(props) => {
 	return (
 		<div>
 			<form onSubmit={props.onSubmit}>
-				<h1 className="login-signup-words"> Create Account </h1>
-
+				<h1 className="login-signup-words"> Signup </h1>
 				  <div className="form-group">
-					<label className="control-label login-signup-words"> Username</label>
+					<label className="control-label"> Username</label>
 					<input
 						onChange={props.onChange}
 						type="text"
@@ -17,7 +16,7 @@ const SignupInput =(props) =>{
 					</div>
 
           <div className="form-group">
-					<label className="control-label login-signup-words"> E-mail</label>
+					<label className="control-label"> E-mail</label>
 					<input
 						onChange={props.onChange}
 						type="text"
@@ -27,7 +26,7 @@ const SignupInput =(props) =>{
 					</div>
 
 				  <div className="form-group">
-					<label className="control-label login-signup-words">Password</label>
+					<label className="control-label">Password</label>
 					<input
 						onChange={props.onChange}
 						type="password"
@@ -40,12 +39,10 @@ const SignupInput =(props) =>{
 						<button className="btn btn-secondary btn-lg">Sign Up
 						</button>
 					</div>
-
 			</form>
 		</div>
 		)
 	}
-
 
 export default SignupInput;
 

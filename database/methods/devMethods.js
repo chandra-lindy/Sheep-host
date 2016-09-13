@@ -1,18 +1,18 @@
 'use strict';
+var Promise = require("bluebird");
+var mongoose = Promise.promisifyAll(require("mongoose"));
+var sendMail = require('../../server/verify.js');
+var randomstring = require('randomstring');
+var jwt = require ('jsonwebtoken');
 var Models = require('../models/devModel');
 var uri = 'mongodb://localhost/';
 var sheepDB = require('../SheepDB');
-var sendMail = require('../../server/verify.js');
-var randomstring = require('randomstring');
-var verModel = require('../models/verModel');
-var Promise = require("bluebird");
-var mongoose = Promise.promisifyAll(require("mongoose"));
-var schemaParser = require('./schemaParser') 
-var jwt = require ('jsonwebtoken');
-var apiKey = require('./devAPI/api-key-controller');
+var verifyModel = require('../models/verifyModel');
+var schemaParser = require('./schemaParser')
+var apiKey = require('./apiKeyMethods');
 
 function verify(req, res, next) {
-  verModel.findOne({ key: req.params.key }, function(err, result) {
+  verifyModel.findOne({ key: req.params.key }, function(err, result) {
     if (err) res.json({error : 'Error'});
     else {
       req.body.userName = result.userName;
@@ -25,7 +25,7 @@ function verify(req, res, next) {
 
 function sendVerification(req, res, next) {
   var randomKey = randomstring.generate();
-  verModel.create({
+  verifyModel.create({
     userName: req.body.userName,
     password: req.body.password,
     email: req.body.email,
@@ -44,14 +44,14 @@ function sendVerification(req, res, next) {
 // returns all databases names/_id (NO ACTUAL DATA) for a dev
 function getAllDatabases(req, res, next){
   var data = [];
-  
+
   return Models.DB.find({_creator: req.params.devID}).execAsync()
   .then(function(results){
     console.log('results getAllDatabases', results);
     return Promise.each(results, function(database){
       console.log('before nested promise',database._creator, database.name);
       var devDB = sheepDB.useDb(database._creator + '_' + database.name);
-      return Promise.each(database.collections, function(collection){ 
+      return Promise.each(database.collections, function(collection){
         console.log('nested promise',collection.name, collection.devSchema);
         var devModel = devDB.model(collection.name, new mongoose.Schema(JSON.parse(collection.devSchema)));
         return devModel.find({}).execAsync()
