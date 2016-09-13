@@ -1,3 +1,8 @@
+.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .container{
 	background: url('./graph-databases.png');
 	height: 100%;
