@@ -42,7 +42,7 @@ const Dashboard = React.createClass({
 			deleteQuery:'',
 			secretKeyVisible: false,
 			authKey: '',
-			permissions: {}
+			permissions: {},
 		}
 	},
 
@@ -111,7 +111,7 @@ const Dashboard = React.createClass({
 		const link = _id + '/' + _dbName + '/' + _collectionName;
 		axios({
 			method: 'get',
-			baseURL: 'https://sheep.host/api/',
+			baseURL: 'http://localhost:3000/api/',
 			url: link,
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken}
 		}).then(function(response){
@@ -260,16 +260,21 @@ const Dashboard = React.createClass({
   },
 
   onPermissionsClick(e) {
-  	e.preventDefault();
   	let that = this;
   	let permissions = that.state.permissions;
-  	let permission = e.target.value;
-  	permissions[permission] = !permissions[permission]
-  	this.setState({permissions});
+  	console.log('perm click name', e.target.name);
+  	console.log('state permissions', that.state.permissions);
+  	let permission = e.target.name;
+  	permissions[permission] = (e.target.value === 'true') ? false: true;
+  	console.log('permissions click', permissions)
+  	that.setState({permissions});
+  	console.log('permissions click', that.state.permissions)
   },
 
   savePermissions(e){
   	e.preventDefault();
+  	console.log('saved');
+  	let that = this;
   	let data = {};
   	let encoded = this.state.authKey;
 		let decoded = new Buffer(encoded, 'base64').toString('utf8');
@@ -284,6 +289,8 @@ const Dashboard = React.createClass({
 			headers: {Authorization: 'Bearer '+ localStorage.sheepToken},
 			data: data
 		}).then(function(response){
+			console.log('setstate');
+			that.setState({permissions})
 		})
   },
 
@@ -348,7 +355,7 @@ const Dashboard = React.createClass({
 					</div>
 				}
 			</div>
-		)	
+		)
 	}
 })
 
